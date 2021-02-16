@@ -6,6 +6,7 @@ class ListNode {
     
     init(_ val: Int) {
         self.val = val
+        self.next = nil
     }
 }
 
@@ -118,3 +119,55 @@ class MyLinkedList {
 var l = MyLinkedList()
 l.addAtHead(2)
 print(l.get(0))
+
+
+class Solution {
+    func hasCycle(_ head: ListNode?) -> Bool {
+        var slow_p = head
+        var fast_p = head
+        
+        while fast_p != nil , fast_p?.next != nil {
+            slow_p = slow_p?.next
+            fast_p = fast_p?.next?.next
+            
+            if slow_p === fast_p {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func detectCycle(_ head: ListNode?) -> ListNode? {
+        if (head == nil || head?.next == nil) {
+            return nil
+        }
+        
+        var slowPointer = head
+        var fastPointer = head
+        
+        // Once they match, stop iterating.
+        while (slowPointer?.next != nil || fastPointer?.next != nil || fastPointer?.next?.next != nil) {
+            slowPointer = slowPointer?.next
+            fastPointer = fastPointer?.next?.next
+            
+            if (slowPointer === fastPointer) {
+                break
+            }
+        }
+        
+        // Reset slow pointer back to headnode to start again.
+        slowPointer = head
+
+        // When slow pointer and fast pointer meets, that's the start of the cycle.
+        while(slowPointer !== fastPointer) {
+            slowPointer = slowPointer?.next
+            fastPointer = fastPointer?.next
+        }
+        
+        return slowPointer
+    }
+}
+
+var s = Solution()
+print(s.hasCycle(l.head))
+print(s.detectCycle(l.head) as Any)
