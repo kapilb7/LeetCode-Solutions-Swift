@@ -171,3 +171,14 @@ class Solution {
 var s = Solution()
 print(s.hasCycle(l.head))
 print(s.detectCycle(l.head) as Any)
+
+var linkedList = MyLinkedList()
+linkedList.addAtHead(3)
+linkedList.addAtTail(2)
+linkedList.addAtTail(0)
+linkedList.addAtTail(-4)
+
+if linkedList.get(3) == -4 {
+   // print(linkedList.tail?.val)
+}
+
